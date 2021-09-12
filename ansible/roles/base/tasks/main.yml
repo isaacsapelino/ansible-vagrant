@@ -1,0 +1,7 @@
+---
+- name: Adding SSH Keys for Vagrant
+  tags: ssh
+  authorized_key:
+    user: vagrant
+    state: present
+    key: "{{ lookup('file', '/home/vagrant/.ssh/id_rsa.pub') }}"

@@ -1,0 +1,16 @@
+---
+- name: Installing MariaDB (Alpine)
+  tags: db,mariadb,alpine
+  apk:
+          name: mariadb
+          state: latest
+          update_cache: yes
+  when: ansible_distribution == "Alpine Linux"
+
+- name: Installing MariaDB (Ubuntu)
+  tags: db,mariadb,ubuntu
+  apt:
+          name: mariadb
+          state: latest
+          update_cache: yes
+  when: ansible_distribution == "Ubuntu"

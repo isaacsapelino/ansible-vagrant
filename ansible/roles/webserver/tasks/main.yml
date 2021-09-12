@@ -1,0 +1,23 @@
+---
+- name: Installing Apache and PHP (Alpine)
+  tags: web,alpine,apache,php
+  apk:
+    name:
+      - apache2
+      - php7-apache2
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Alpine Linux"
+
+- name: Installing Apache and PHP (Ubuntu)
+  tags: web,ubuntu,apache,php
+  apt:
+    name:
+      - apache2
+      - php
+      - libapache2-mod-php
+      - php-mcrypt
+      - php-mysql
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
