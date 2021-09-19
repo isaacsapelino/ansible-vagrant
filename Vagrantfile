@@ -7,6 +7,15 @@ Vagrant.configure("2") do |config|
     config.vbguest.auto_update = false
   end
 
+  # ACTIVITY  IP ADDRESSES
+
+  IPADD1 = "192.168.122.117"
+  IPADD2 = "192.168.122.125"
+  IPADD3 = "192.168.122.127"
+
+  # ACTIVITY HOSTNAME
+  HOSTNAME = "1912031"
+
   config.vm.define "ansible", primary: true do |ansible|
 
     # Virtual Box Configuration
@@ -25,7 +34,7 @@ Vagrant.configure("2") do |config|
     end
 
     ansible.vm.box = "generic/alpine38"
-    ansible.vm.network "private_network", ip: "192.168.20.2",
+    ansible.vm.network "private_network", ip: IPADD1,
       virtualbox__intnet: "mynetwork"
       
     ansible.vm.synced_folder "./ansible", "/ansible", owner: "vagrant",
@@ -61,7 +70,8 @@ Vagrant.configure("2") do |config|
     end
 
     server1.vm.box = "mmichal/ubuntu20_04"
-    server1.vm.network "private_network", ip: "192.168.20.3",
+    server1.vm.hostname="ubuntu-" + HOSTNAME
+    server1.vm.network "private_network", ip: IPADD2,
       virtualbox__intnet: "mynetwork"
     
     server1.vm.synced_folder "./data", "/vagrant", owner: "vagrant",
@@ -87,7 +97,7 @@ Vagrant.configure("2") do |config|
     end
 
     server2.vm.box = "centos/8"
-    server2.vm.network "private_network", ip: "192.168.20.4",
+    server2.vm.network "private_network", ip: IPADD3,
       virtualbox__intnet: "mynetwork"
     
     server2.vm.synced_folder "./data", "/vagrant", owner: "vagrant",
